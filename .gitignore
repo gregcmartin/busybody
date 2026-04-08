@@ -1,0 +1,15 @@
+# Compiled binary
+busybody
+
+# OS files
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test/cached data
+/tmp/
+*.html
