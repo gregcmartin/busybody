@@ -16,6 +16,7 @@ var calendarPatterns = []*regexp.Regexp{
 	regexp.MustCompile(`https?://(?:www\.)?cal\.com/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)?`),
 	regexp.MustCompile(`https?://calendar\.google\.com/calendar/appointments/[^\s"'<>]+`),
 	regexp.MustCompile(`https?://calendar\.app\.google/[^\s"'<>]+`),
+	regexp.MustCompile(`https?://scheduler\.zoom\.us/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)?`),
 }
 
 // hrefPattern extracts href values from HTML.

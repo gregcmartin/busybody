@@ -9,7 +9,7 @@ import (
 // CalendarLink holds a normalized calendar URL and its detected provider type.
 type CalendarLink struct {
 	Raw      string
-	Provider string // "calendly", "calcom", "google"
+	Provider string // "calendly", "calcom", "google", "zoom"
 	Owner    string
 	Slug     string // event type slug (may be empty)
 }
@@ -28,6 +28,8 @@ func DetectProvider(raw string) (Provider, *CalendarLink, error) {
 		return &CalcomProvider{}, link, nil
 	case "google":
 		return &GoogleProvider{}, link, nil
+	case "zoom":
+		return &ZoomProvider{}, link, nil
 	default:
 		return nil, nil, fmt.Errorf("unsupported calendar provider: %s", link.Provider)
 	}
@@ -69,11 +71,19 @@ func ParseCalendarURL(raw string) (*CalendarLink, error) {
 	case strings.Contains(host, "calendar.google.com") || strings.Contains(host, "calendar.app.google"):
 		link.Provider = "google"
 		link.Owner = path
+	case strings.Contains(host, "scheduler.zoom.us"):
+		link.Provider = "zoom"
+		if len(parts) >= 1 && parts[0] != "" {
+			link.Owner = parts[0]
+		}
+		if len(parts) >= 2 {
+			link.Slug = parts[1]
+		}
 	default:
-		return nil, fmt.Errorf("unrecognized calendar service in URL %q (supported: calendly.com, cal.com, calendar.google.com)", raw)
+		return nil, fmt.Errorf("unrecognized calendar service in URL %q (supported: calendly.com, cal.com, scheduler.zoom.us, calendar.google.com)", raw)
 	}
 
-	if link.Provider != "google" && link.Owner == "" {
+	if link.Provider != "google" && link.Provider != "zoom" && link.Owner == "" {
 		return nil, fmt.Errorf("could not extract username from URL %q", raw)
 	}
 	return link, nil
