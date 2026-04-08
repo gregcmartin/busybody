@@ -1,14 +1,24 @@
-Calculate a person or companies availability by reverse engineering how much open time from their calendar services (supports google, calendly, cal.com)
+# Busybody
 
-cli tool written in golang, has two options:
+Find out how busy someone really is by checking their public calendar availability. Generates a busyness score (0-100) from Calendly, Cal.com, or Google Calendar.
 
-1. get all calendly links from website  ./busybody -site startup.com
-2. check a calendar directly ./busybody -calendar cal.com/person
+## Quick Start
 
-Default behavior is to evaluate the most recent available work week (M-F) to determine how much they are booked up and how much free based on calendar availability to generate a busyness score.
+```
+git clone https://github.com/gregcmartin/busybody.git
+cd busybody
+```
 
+Then open with [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and let it handle the rest:
 
+```
+claude
+```
 
+## Usage
 
-
-
+```
+./busybody -calendar calendly.com/someone/30min
+./busybody -calendar cal.com/someone
+./busybody -site startup.com
+```
