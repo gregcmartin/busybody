@@ -1,6 +1,6 @@
 # Busybody
 
-Find out how busy someone really is by checking their public calendar availability. Generates a busyness score (0-100) from Calendly, Cal.com, or Google Calendar.
+Find out how busy someone really is by checking their public calendar availability. Generates a busyness score (0-100) from Calendly, Cal.com, Zoom Scheduler, or Google Calendar.
 
 ## Quick Start
 
@@ -20,5 +20,6 @@ claude
 ```
 ./busybody -calendar calendly.com/someone/30min
 ./busybody -calendar cal.com/someone
+./busybody -calendar scheduler.zoom.us/someone
 ./busybody -site startup.com
 ```
